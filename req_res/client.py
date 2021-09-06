@@ -1,11 +1,15 @@
 import zmq;
+import sys;
 from string import ascii_letters, digits
 from random import choice
+
+if len(sys.argv) > 1:
+    host = sys.argv[1]
 
 context = zmq.Context()
 print("Connecting to hello world server...")
 socket = context.socket(zmq.REQ)
-socket.connect("tcp://localhost:5555")
+socket.connect(f"tcp://{host}:5555")
 
 for request in range(10):
     print("Sending request %s .." % request)
